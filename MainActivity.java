@@ -8,6 +8,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.content.Intent;
+import android.webkit.JavascriptInterface;
 import android.net.Uri;
 
 public class MainActivity extends Activity {
@@ -19,6 +20,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         webView = new WebView(this);
+        webView.addJavascriptInterface(new AndroidShare(), "AndroidShare");
         setContentView(webView);
 
         WebSettings s = webView.getSettings();
@@ -62,5 +64,16 @@ public class MainActivity extends Activity {
     public void onBackPressed() {
         if (webView.canGoBack()) webView.goBack();
         else super.onBackPressed();
+    }
+    public class AndroidShare {
+    @JavascriptInterface
+    public void share(String text) {
+        Intent sendIntent = new Intent(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, text);
+        sendIntent.setType("text/plain");
+
+        Intent shareIntent = Intent.createChooser(sendIntent, "Share via");
+        startActivity(shareIntent);
+    }
     }
 }
