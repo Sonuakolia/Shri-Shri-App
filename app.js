@@ -89,8 +89,7 @@ function videoCard(v) {
   muted
   playsinline
   preload="metadata"
-  onloadedmetadata="this.currentTime=0.5"
-></video>
+  <video src="${v.runtimeUrl}" muted preload="metadata"></video>
             : `<div class="play-placeholder">▶</div>`
         }
       </div>
