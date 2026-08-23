@@ -84,7 +84,13 @@ function videoCard(v) {
       <div class="thumb">
         ${
           v.runtimeUrl
-            ? `<video src="${v.runtimeUrl}" muted preload="metadata"></video>`
+            <video
+  src="${v.runtimeUrl}"
+  muted
+  playsinline
+  preload="metadata"
+  onloadedmetadata="this.currentTime=0.5"
+></video>
             : `<div class="play-placeholder">▶</div>`
         }
       </div>
