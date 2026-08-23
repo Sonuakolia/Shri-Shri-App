@@ -1,0 +1,94 @@
+name: Build Shri Shri APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.7'
+
+      - name: Prepare Android Project
+        run: |
+          mkdir -p app/src/main/java/com/shrishri/app
+          mkdir -p app/src/main/res/values
+          mkdir -p app/src/main/assets
+
+          cp AndroidManifest.xml app/src/main/AndroidManifest.xml
+          cp MainActivity.java app/src/main/java/com/shrishri/app/MainActivity.java
+          cp styles.xml app/src/main/res/values/styles.xml
+
+          cp index.html app/src/main/assets/index.html
+          cp app.js app/src/main/assets/app.js
+          cp style.css app/src/main/assets/style.css
+
+          cat > settings.gradle <<'EOF'
+          pluginManagement {
+              repositories {
+                  google()
+                  mavenCentral()
+                  gradlePluginPortal()
+              }
+          }
+
+          dependencyResolutionManagement {
+              repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+              repositories {
+                  google()
+                  mavenCentral()
+              }
+          }
+
+          rootProject.name = "ShriShri"
+          include(":app")
+          EOF
+
+          cat > build.gradle <<'EOF'
+          plugins {
+              id 'com.android.application' version '8.5.2' apply false
+          }
+          EOF
+
+          cat > app/build.gradle <<'EOF'
+          plugins {
+              id 'com.android.application'
+          }
+
+          android {
+              namespace 'com.shrishri.app'
+              compileSdk 35
+
+              defaultConfig {
+                  applicationId "com.shrishri.app"
+                  minSdk 24
+                  targetSdk 35
+                  versionCode 1
+                  versionName "1.0"
+              }
+          }
+          EOF
+
+      - name: Build APK
+        run: gradle assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Shri-Shri-APK
+          path: app/build/outputs/apk/debug/app-debug.apk
