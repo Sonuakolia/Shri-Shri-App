@@ -1,38 +1,103 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Shri Shri</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <meta name="theme-color" content="#0f0f0f">
+
+  <title>Shri Shri</title>
+
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-<header>
-  <div class="brand" onclick="go('home')"><b>SS</b><span>Shri Shri</span></div>
-  <div class="search"><input id="q" placeholder="Search videos"><button onclick="searchVideos()">Search</button></div>
-  <button onclick="go('upload')" class="primary">Upload</button>
-</header>
 
-<aside>
-  <button onclick="go('home')">🏠 Home</button>
-  <button onclick="go('shorts')">🎬 Shorts</button>
-  <button onclick="go('subscriptions')">🔔 Subscriptions</button>
-  <button onclick="go('library')">📚 Library</button>
-  <button onclick="go('channel')">👤 My Channel</button>
-  <button onclick="go('admin')">🛠 Admin</button>
-  <button onclick="go('login')">🔐 Login / Signup</button>
-</aside>
+  <!-- TOP HEADER -->
+  <header class="topbar">
 
-<main id="app"></main>
+    <div class="logo" onclick="go('home')">
+      <div class="logo-box">SS</div>
+      <span>Shri Shri</span>
+    </div>
 
-<nav>
-  <button onclick="go('home')">🏠<small>Home</small></button>
-  <button onclick="go('shorts')">🎬<small>Shorts</small></button>
-  <button onclick="go('upload')">➕<small>Upload</small></button>
-  <button onclick="go('subscriptions')">🔔<small>Subs</small></button>
-  <button onclick="go('channel')">👤<small>You</small></button>
-</nav>
+    <div class="search-box">
+      <input
+        id="q"
+        type="search"
+        placeholder="Search videos"
+        oninput="searchVideos()"
+      >
+      <span class="search-icon">⌕</span>
+    </div>
 
-<script src="app.js"></script>
+  </header>
+
+
+  <!-- CATEGORY BAR -->
+  <div class="categories">
+
+    <button onclick="renderHome()">All</button>
+
+    <button onclick="renderShorts()">Shorts</button>
+
+    <button onclick="renderSubscriptions()">
+      Subscriptions
+    </button>
+
+    <button onclick="renderHistory()">
+      History
+    </button>
+
+  </div>
+
+
+  <!-- MAIN APP CONTENT -->
+  <main id="app">
+
+    <div class="loading">
+      Loading Shri Shri...
+    </div>
+
+  </main>
+
+
+  <!-- BOTTOM NAVIGATION -->
+  <nav class="bottom-nav">
+
+    <button onclick="go('home')">
+      <span>⌂</span>
+      <small>Home</small>
+    </button>
+
+    <button onclick="go('shorts')">
+      <span>▶</span>
+      <small>Shorts</small>
+    </button>
+
+    <button
+      class="upload-button"
+      onclick="go('upload')">
+      <span>＋</span>
+      <small>Upload</small>
+    </button>
+
+    <button onclick="go('subs')">
+      <span>🔔</span>
+      <small>Subs</small>
+    </button>
+
+    <button onclick="go('profile')">
+      <span>●</span>
+      <small>You</small>
+    </button>
+
+  </nav>
+
+
+  <script src="app.js"></script>
+
 </body>
 </html>
