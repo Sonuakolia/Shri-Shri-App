@@ -292,18 +292,19 @@ function addComment(id) {
 
 function shareVideo(id) {
   const video = state.videos.find(v => v.id === id);
-
   if (!video) return;
 
   const text = `${video.title} - Shri Shri`;
 
-  if (navigator.share) {
+  if (window.AndroidShare && window.AndroidShare.share) {
+    window.AndroidShare.share(text);
+  } else if (navigator.share) {
     navigator.share({
       title: video.title,
-      text
+      text: text
     }).catch(() => {});
   } else {
-    alert(text);
+    alert("Share is not available.");
   }
 }
 
