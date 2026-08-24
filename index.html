@@ -2,354 +2,63 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>ShriPlay</title>
-
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-  font-family:Arial,Helvetica,sans-serif
-}
-body{
-  background:#fff;
-  color:#111;
-  padding-bottom:72px
-}
-header{
-  height:58px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 14px;
-  position:sticky;
-  top:0;
-  background:#fff;
-  z-index:20;
-  border-bottom:1px solid #eee
-}
-.logo{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  font-size:23px;
-  font-weight:700
-}
-.logoIcon{
-  width:36px;
-  height:25px;
-  background:#ef233c;
-  border-radius:7px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#fff;
-  font-size:18px
-}
-.topicons{
-  display:flex;
-  align-items:center;
-  gap:18px;
-  font-size:22px
-}
-.avatar{
-  width:32px;
-  height:32px;
-  border-radius:50%;
-  background:#ef233c;
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:bold
-}
-.searchBox{
-  padding:10px 12px;
-  background:#fff;
-  display:none;
-  position:sticky;
-  top:58px;
-  z-index:18;
-  border-bottom:1px solid #eee
-}
-.searchBox input{
-  width:100%;
-  padding:12px 16px;
-  border:1px solid #bbb;
-  border-radius:22px;
-  outline:none;
-  font-size:16px
-}
-.categories{
-  display:flex;
-  overflow-x:auto;
-  gap:8px;
-  padding:10px 10px;
-  scrollbar-width:none
-}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}
+body{background:#fff;color:#111;padding-bottom:72px}
+header{height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;position:sticky;top:0;background:#fff;z-index:20;border-bottom:1px solid #eee}
+.logo{display:flex;align-items:center;gap:8px;font-size:23px;font-weight:700}
+.logoIcon{width:36px;height:25px;background:#ef233c;border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px}
+.topicons{display:flex;align-items:center;gap:18px;font-size:22px}
+.avatar{width:32px;height:32px;border-radius:50%;background:#ef233c;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold}
+.searchBox{padding:10px 12px;background:#fff;display:none;position:sticky;top:58px;z-index:18;border-bottom:1px solid #eee}
+.searchBox input{width:100%;padding:12px 16px;border:1px solid #bbb;border-radius:22px;outline:none;font-size:16px}
+.categories{display:flex;overflow-x:auto;gap:8px;padding:10px;scrollbar-width:none}
 .categories::-webkit-scrollbar{display:none}
-.cat{
-  background:#eee;
-  padding:8px 14px;
-  border-radius:9px;
-  white-space:nowrap;
-  font-size:14px
-}
-.cat.active{
-  background:#111;
-  color:#fff
-}
-.page{display:none}
-.page.active{display:block}
-.video{
-  margin-bottom:18px
-}
-.thumb{
-  width:100%;
-  aspect-ratio:16/9;
-  background:linear-gradient(135deg,#111,#6a1b9a,#ef233c);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:relative;
-  overflow:hidden
-}
-.thumb .play{
-  width:64px;
-  height:64px;
-  border-radius:50%;
-  background:rgba(0,0,0,.55);
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:34px
-}
-.thumb .tag{
-  position:absolute;
-  left:15px;
-  bottom:14px;
-  color:white;
-  font-size:25px;
-  font-weight:bold
-}
-.duration{
-  position:absolute;
-  bottom:8px;
-  right:8px;
-  background:#111;
-  color:#fff;
-  padding:3px 5px;
-  border-radius:4px;
-  font-size:12px
-}
-.details{
-  display:flex;
-  padding:12px
-}
-.channelIcon{
-  width:42px;
-  height:42px;
-  min-width:42px;
-  border-radius:50%;
-  background:#ef233c;
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin-right:11px;
-  font-weight:bold
-}
-.title{
-  font-size:16px;
-  line-height:21px;
-  font-weight:500
-}
-.meta{
-  margin-top:5px;
-  color:#666;
-  font-size:12px
-}
-.more{
-  margin-left:auto;
-  font-size:22px;
-  padding-left:8px
-}
-.bottom{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  height:66px;
-  background:#fff;
-  border-top:1px solid #ddd;
-  display:flex;
-  justify-content:space-around;
-  z-index:30
-}
-.nav{
-  width:20%;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  font-size:11px;
-  gap:3px
-}
-.nav .ico{
-  font-size:24px
-}
-.nav.active{
-  font-weight:bold
-}
-.plus{
-  width:43px;
-  height:43px;
-  border-radius:50%;
-  background:#eee;
-  border:1px solid #ccc;
-  font-size:32px;
-  display:flex;
-  align-items:center;
-  justify-content:center
-}
-.centerPage{
-  min-height:75vh;
-  padding:25px 16px
-}
-.heading{
-  font-size:25px;
-  font-weight:bold;
-  margin-bottom:18px
-}
-.card{
-  padding:16px;
-  border:1px solid #eee;
-  border-radius:12px;
-  margin-bottom:12px;
-  display:flex;
-  align-items:center;
-  gap:15px;
-  font-size:17px
-}
-.shortWrap{
-  height:calc(100vh - 124px);
-  background:#050505;
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:relative
-}
-.shortTitle{
-  text-align:center
-}
-.shortTitle .big{
-  font-size:56px
-}
-.shortTitle h2{
-  font-size:30px
-}
-.shortActions{
-  position:absolute;
-  right:18px;
-  bottom:60px;
-  text-align:center
-}
-.shortActions div{
-  font-size:25px;
-  margin-top:24px
-}
-.profileHead{
-  display:flex;
-  align-items:center;
-  gap:15px;
-  margin-bottom:20px
-}
-.bigAvatar{
-  width:70px;
-  height:70px;
-  border-radius:50%;
-  background:#ef233c;
-  color:#fff;
-  font-size:30px;
-  display:flex;
-  align-items:center;
-  justify-content:center
-}
-.button{
-  background:#ef233c;
-  color:#fff;
-  border:0;
-  border-radius:20px;
-  padding:9px 18px;
-  margin-top:8px
-}
-.playerPage{
-  display:none;
-  background:#fff;
-  min-height:100vh;
-  position:fixed;
-  inset:0;
-  z-index:100;
-  overflow-y:auto
-}
-.playerTop{
-  padding:12px;
-  font-size:20px
-}
-.playerVideo{
-  width:100%;
-  aspect-ratio:16/9;
-  background:#000
-}
-.playerVideo video{
-  width:100%;
-  height:100%
-}
-.playerInfo{
-  padding:14px
-}
-.actions{
-  display:flex;
-  overflow-x:auto;
-  gap:8px;
-  padding:12px 0
-}
-.action{
-  background:#eee;
-  padding:9px 14px;
-  border-radius:20px;
-  white-space:nowrap
-}
-.subscribe{
-  display:flex;
-  align-items:center;
-  margin-top:15px;
-  padding:12px 0;
-  border-top:1px solid #eee;
-  border-bottom:1px solid #eee
-}
-.subscribe button{
-  margin-left:auto;
-  border:0;
-  padding:10px 14px;
-  border-radius:20px;
-  background:#111;
-  color:#fff
-}
+.cat{background:#eee;padding:8px 14px;border-radius:9px;white-space:nowrap;font-size:14px}
+.cat.active{background:#111;color:#fff}
+.page{display:none}.page.active{display:block}
+.video{margin-bottom:18px}
+.thumb{width:100%;aspect-ratio:16/9;background:linear-gradient(135deg,#111,#6a1b9a,#ef233c);display:flex;align-items:center;justify-content:center;position:relative}
+.thumb .play{width:64px;height:64px;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;display:flex;align-items:center;justify-content:center;font-size:34px}
+.thumb .tag{position:absolute;left:15px;bottom:14px;color:#fff;font-size:25px;font-weight:bold}
+.duration{position:absolute;bottom:8px;right:8px;background:#111;color:#fff;padding:3px 5px;border-radius:4px;font-size:12px}
+.details{display:flex;padding:12px}
+.channelIcon{width:42px;height:42px;min-width:42px;border-radius:50%;background:#ef233c;color:#fff;display:flex;align-items:center;justify-content:center;margin-right:11px;font-weight:bold}
+.title{font-size:16px;line-height:21px;font-weight:500}
+.meta{margin-top:5px;color:#666;font-size:12px}
+.more{margin-left:auto;font-size:22px;padding-left:8px}
+.bottom{position:fixed;bottom:0;left:0;right:0;height:66px;background:#fff;border-top:1px solid #ddd;display:flex;justify-content:space-around;z-index:30}
+.nav{width:20%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:11px;gap:3px}
+.nav .ico{font-size:24px}.nav.active{font-weight:bold}
+.plus{width:43px;height:43px;border-radius:50%;background:#eee;border:1px solid #ccc;font-size:32px;display:flex;align-items:center;justify-content:center}
+.centerPage{min-height:75vh;padding:25px 16px}
+.heading{font-size:25px;font-weight:bold;margin-bottom:18px}
+.card{padding:16px;border:1px solid #eee;border-radius:12px;margin-bottom:12px;display:flex;align-items:center;gap:15px;font-size:17px;cursor:pointer}
+.card:active{background:#f3f3f3}
+.shortWrap{height:calc(100vh - 124px);background:#050505;color:#fff;display:flex;align-items:center;justify-content:center;position:relative}
+.shortTitle{text-align:center}.shortTitle .big{font-size:56px}.shortTitle h2{font-size:30px}
+.shortActions{position:absolute;right:18px;bottom:60px;text-align:center}.shortActions div{font-size:25px;margin-top:24px}
+.profileHead{display:flex;align-items:center;gap:15px;margin-bottom:20px}
+.bigAvatar{width:70px;height:70px;border-radius:50%;background:#ef233c;color:#fff;font-size:30px;display:flex;align-items:center;justify-content:center}
+.button{background:#ef233c;color:#fff;border:0;border-radius:20px;padding:9px 18px;margin-top:8px}
+.playerPage{display:none;background:#fff;min-height:100vh;position:fixed;inset:0;z-index:100;overflow-y:auto}
+.playerTop{padding:12px;font-size:20px}.playerVideo{width:100%;aspect-ratio:16/9;background:#000}.playerVideo video{width:100%;height:100%}
+.playerInfo{padding:14px}.actions{display:flex;overflow-x:auto;gap:8px;padding:12px 0}.action{background:#eee;padding:9px 14px;border-radius:20px;white-space:nowrap}
+.subscribe{display:flex;align-items:center;margin-top:15px;padding:12px 0;border-top:1px solid #eee;border-bottom:1px solid #eee}
+.subscribe button{margin-left:auto;border:0;padding:10px 14px;border-radius:20px;background:#111;color:#fff}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;align-items:center;justify-content:center;padding:18px}
+.modalBox{width:100%;max-width:420px;background:#fff;border-radius:16px;padding:20px}
+.modalBox h2{margin-bottom:14px}.modalBox input,.modalBox textarea{width:100%;padding:12px;border:1px solid #ccc;border-radius:10px;margin:6px 0 12px;font-size:16px}
+.modalBtns{display:flex;gap:10px;justify-content:flex-end}.modalBtns button{padding:10px 16px;border:0;border-radius:20px}.primary{background:#ef233c;color:#fff}
+.notice{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#111;color:#fff;padding:10px 16px;border-radius:20px;z-index:300;display:none;white-space:nowrap}
 </style>
 </head>
-
 <body>
 
 <header>
-  <div class="logo">
-    <div class="logoIcon">▶</div>
-    <span>ShriPlay</span>
-  </div>
-
+  <div class="logo"><div class="logoIcon">▶</div><span>ShriPlay</span></div>
   <div class="topicons">
     <span onclick="toggleSearch()">⌕</span>
     <span onclick="showPage('notifications')">♢</span>
@@ -362,63 +71,41 @@ header{
 </div>
 
 <div id="home" class="page active">
-
   <div class="categories">
-    <div class="cat active">All</div>
-    <div class="cat">Music</div>
-    <div class="cat">Live</div>
-    <div class="cat">Gaming</div>
-    <div class="cat">News</div>
-    <div class="cat">Travel</div>
-    <div class="cat">EV</div>
+    <div class="cat active">All</div><div class="cat">Music</div><div class="cat">Live</div>
+    <div class="cat">Gaming</div><div class="cat">News</div><div class="cat">Travel</div><div class="cat">EV</div>
   </div>
-
   <div id="videoList"></div>
-
 </div>
 
 <div id="shorts" class="page">
   <div class="shortWrap">
-    <div class="shortTitle">
-      <div class="big">▶</div>
-      <h2>ShriPlay Shorts</h2>
-      <p>Short videos</p>
-    </div>
-
-    <div class="shortActions">
-      <div>👍<br><small>24K</small></div>
-      <div>💬<br><small>987</small></div>
-      <div>↗<br><small>Share</small></div>
-    </div>
+    <div class="shortTitle"><div class="big">▶</div><h2>ShriPlay Shorts</h2><p>Short videos</p></div>
+    <div class="shortActions"><div>👍<br><small>24K</small></div><div>💬<br><small>987</small></div><div>↗<br><small>Share</small></div></div>
   </div>
 </div>
 
 <div id="create" class="page">
   <div class="centerPage">
     <div class="heading">Create on ShriPlay</div>
-
-    <div class="card">⬆️ Upload a video</div>
-    <div class="card">🎬 Create a Short</div>
-    <div class="card">🔴 Go Live</div>
-    <div class="card">📝 Create a post</div>
+    <div class="card" onclick="chooseVideo()">⬆️ Upload a video</div>
+    <div class="card" onclick="chooseShort()">🎬 Create a Short</div>
+    <div class="card" onclick="goLive()">🔴 Go Live</div>
+    <div class="card" onclick="openPostModal()">📝 Create a post</div>
   </div>
 </div>
 
 <div id="subscriptions" class="page">
   <div class="centerPage">
     <div class="heading">Subscriptions</div>
-
-    <div class="card">🔴 ShriPlay Travel</div>
-    <div class="card">🔵 EV India</div>
-    <div class="card">🟠 Pahadi World</div>
-    <div class="card">🟣 Music India</div>
+    <div class="card">🔴 ShriPlay Travel</div><div class="card">🔵 EV India</div>
+    <div class="card">🟠 Pahadi World</div><div class="card">🟣 Music India</div>
   </div>
 </div>
 
 <div id="notifications" class="page">
   <div class="centerPage">
     <div class="heading">Notifications</div>
-
     <div class="card">🔔 ShriPlay Travel uploaded a new video</div>
     <div class="card">❤️ Your video received 24 likes</div>
     <div class="card">🔴 EV India is live now</div>
@@ -428,266 +115,134 @@ header{
 
 <div id="profile" class="page">
   <div class="centerPage">
-
-    <div class="profileHead">
-      <div class="bigAvatar">S</div>
-      <div>
-        <div class="heading" style="margin:0">ShriPlay</div>
-        <div style="color:#666">@shriplay</div>
-        <div style="color:#666">128K subscribers</div>
-      </div>
-    </div>
-
-    <button class="button">View Channel</button>
-
-    <br><br>
-
-    <div class="heading">You</div>
-
-    <div class="card">🕘 History</div>
-    <div class="card">▶ Your videos</div>
-    <div class="card">⬇ Downloads</div>
-    <div class="card">🔖 Saved videos</div>
-    <div class="card">⚙ Settings</div>
-
+    <div class="profileHead"><div class="bigAvatar">S</div><div><div class="heading" style="margin:0">ShriPlay</div><div style="color:#666">@shriplay</div><div style="color:#666">128K subscribers</div></div></div>
+    <button class="button" onclick="toast('Channel page coming next')">View Channel</button>
+    <br><br><div class="heading">You</div>
+    <div class="card" onclick="toast('History opened')">🕘 History</div>
+    <div class="card" onclick="toast('Your videos opened')">▶ Your videos</div>
+    <div class="card" onclick="toast('Downloads opened')">⬇ Downloads</div>
+    <div class="card" onclick="toast('Saved videos opened')">🔖 Saved videos</div>
+    <div class="card" onclick="toast('Settings opened')">⚙ Settings</div>
   </div>
 </div>
 
 <div class="bottom">
-
-  <div class="nav active" id="nav-home" onclick="showPage('home')">
-    <div class="ico">⌂</div>
-    Home
-  </div>
-
-  <div class="nav" id="nav-shorts" onclick="showPage('shorts')">
-    <div class="ico">▣</div>
-    Shorts
-  </div>
-
-  <div class="nav" id="nav-create" onclick="showPage('create')">
-    <div class="plus">+</div>
-  </div>
-
-  <div class="nav" id="nav-subscriptions" onclick="showPage('subscriptions')">
-    <div class="ico">▤</div>
-    Subscriptions
-  </div>
-
-  <div class="nav" id="nav-profile" onclick="showPage('profile')">
-    <div class="ico">●</div>
-    You
-  </div>
-
+  <div class="nav active" id="nav-home" onclick="showPage('home')"><div class="ico">⌂</div>Home</div>
+  <div class="nav" id="nav-shorts" onclick="showPage('shorts')"><div class="ico">▣</div>Shorts</div>
+  <div class="nav" id="nav-create" onclick="showPage('create')"><div class="plus">+</div></div>
+  <div class="nav" id="nav-subscriptions" onclick="showPage('subscriptions')"><div class="ico">▤</div>Subscriptions</div>
+  <div class="nav" id="nav-profile" onclick="showPage('profile')"><div class="ico">●</div>You</div>
 </div>
 
 <div class="playerPage" id="playerPage">
-
   <div class="playerTop" onclick="closePlayer()">← ShriPlay</div>
-
-  <div class="playerVideo">
-    <video id="videoPlayer" controls playsinline></video>
-  </div>
-
+  <div class="playerVideo"><video id="videoPlayer" controls playsinline></video></div>
   <div class="playerInfo">
-
-    <h2 id="playerTitle">Video</h2>
-    <p id="playerMeta" style="color:#666;margin-top:7px"></p>
-
+    <h2 id="playerTitle">Video</h2><p id="playerMeta" style="color:#666;margin-top:7px"></p>
     <div class="actions">
-      <div class="action">👍 Like</div>
-      <div class="action">↗ Share</div>
-      <div class="action">⬇ Download</div>
-      <div class="action">🔖 Save</div>
+      <div class="action" onclick="toast('Liked')">👍 Like</div>
+      <div class="action" onclick="shareCurrent()">↗ Share</div>
+      <div class="action" onclick="toast('Download option selected')">⬇ Download</div>
+      <div class="action" onclick="toast('Saved')">🔖 Save</div>
     </div>
-
     <div class="subscribe">
-      <div class="channelIcon">S</div>
-      <div>
-        <b>ShriPlay</b><br>
-        <small>128K subscribers</small>
-      </div>
-      <button>Subscribe</button>
+      <div class="channelIcon">S</div><div><b>ShriPlay</b><br><small>128K subscribers</small></div>
+      <button onclick="this.innerText=this.innerText==='Subscribed'?'Subscribe':'Subscribed'">Subscribe</button>
     </div>
-
-    <h3 style="margin-top:20px">Comments</h3>
-    <p style="margin-top:10px">Amazing video! 🔥</p>
-
+    <h3 style="margin-top:20px">Comments</h3><p style="margin-top:10px">Amazing video! 🔥</p>
   </div>
-
 </div>
 
-<script>
+<input type="file" id="videoInput" accept="video/*" style="display:none">
+<input type="file" id="shortInput" accept="video/*" style="display:none">
 
+<div class="modal" id="postModal">
+  <div class="modalBox">
+    <h2>Create a post</h2>
+    <textarea id="postText" rows="5" placeholder="Share something with your audience..."></textarea>
+    <div class="modalBtns">
+      <button onclick="closePostModal()">Cancel</button>
+      <button class="primary" onclick="publishPost()">Post</button>
+    </div>
+  </div>
+</div>
+
+<div class="notice" id="notice"></div>
+
+<script>
 const videos=[
-{
- title:"Beautiful Uttarakhand Journey",
- channel:"ShriPlay Travel",
- views:"1.2M views",
- age:"2 days ago",
- tag:"TRAVEL",
- url:"https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-},
-{
- title:"Morning Motivation - Start Your Day",
- channel:"ShriPlay Motivation",
- views:"245K views",
- age:"5 hours ago",
- tag:"MOTIVATION",
- url:"https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
-},
-{
- title:"Kumaoni Culture & Pahadi Life",
- channel:"Pahadi World",
- views:"89K views",
- age:"1 week ago",
- tag:"CULTURE",
- url:"https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
-},
-{
- title:"EV Scooter Daily Ride",
- channel:"EV India",
- views:"36K views",
- age:"3 days ago",
- tag:"EV",
- url:"https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"
-},
-{
- title:"Delhi Street Food Tour",
- channel:"Food India",
- views:"540K views",
- age:"6 days ago",
- tag:"FOOD",
- url:"https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"
-}
+ {title:"Beautiful Uttarakhand Journey",channel:"ShriPlay Travel",views:"1.2M views",age:"2 days ago",tag:"TRAVEL",url:"https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"},
+ {title:"Morning Motivation - Start Your Day",channel:"ShriPlay Motivation",views:"245K views",age:"5 hours ago",tag:"MOTIVATION",url:"https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"},
+ {title:"Kumaoni Culture & Pahadi Life",channel:"Pahadi World",views:"89K views",age:"1 week ago",tag:"CULTURE",url:"https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"},
+ {title:"EV Scooter Daily Ride",channel:"EV India",views:"36K views",age:"3 days ago",tag:"EV",url:"https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"}
 ];
 
 function renderVideos(list){
-
- const box=document.getElementById("videoList");
-
- box.innerHTML="";
-
- list.forEach((v,i)=>{
-
- box.innerHTML+=`
- <div class="video" onclick="openPlayer(${videos.indexOf(v)})">
-
-   <div class="thumb">
-     <div class="play">▶</div>
-     <div class="tag">${v.tag}</div>
-     <div class="duration">6:24</div>
-   </div>
-
-   <div class="details">
-
-     <div class="channelIcon">
-       ${v.channel.charAt(0)}
-     </div>
-
-     <div>
-       <div class="title">${v.title}</div>
-       <div class="meta">
-         ${v.channel} • ${v.views} • ${v.age}
-       </div>
-     </div>
-
-     <div class="more">⋮</div>
-
-   </div>
-
- </div>
- `;
-
+ const box=document.getElementById("videoList"); box.innerHTML="";
+ list.forEach(v=>{
+   const idx=videos.indexOf(v);
+   box.innerHTML+=`<div class="video" onclick="openPlayer(${idx})">
+   <div class="thumb"><div class="play">▶</div><div class="tag">${v.tag}</div><div class="duration">6:24</div></div>
+   <div class="details"><div class="channelIcon">${v.channel.charAt(0)}</div><div><div class="title">${v.title}</div>
+   <div class="meta">${v.channel} • ${v.views} • ${v.age}</div></div><div class="more">⋮</div></div></div>`;
  });
-
 }
 
 function showPage(name){
-
- document.querySelectorAll(".page").forEach(p=>{
-   p.classList.remove("active")
- });
-
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
  document.getElementById(name).classList.add("active");
-
- document.querySelectorAll(".nav").forEach(n=>{
-   n.classList.remove("active")
- });
-
- let id="nav-"+name;
-
- if(document.getElementById(id)){
-   document.getElementById(id).classList.add("active");
- }
-
+ document.querySelectorAll(".nav").forEach(n=>n.classList.remove("active"));
+ const id="nav-"+name;if(document.getElementById(id))document.getElementById(id).classList.add("active");
  window.scrollTo(0,0);
-
 }
-
 function toggleSearch(){
-
- const box=document.getElementById("searchBox");
-
- box.style.display=
- box.style.display==="block" ? "none":"block";
-
- if(box.style.display==="block"){
-   document.getElementById("searchInput").focus();
- }
-
+ const b=document.getElementById("searchBox");b.style.display=b.style.display==="block"?"none":"block";
+ if(b.style.display==="block")document.getElementById("searchInput").focus();
 }
-
 function searchVideos(){
-
- const q=document
- .getElementById("searchInput")
- .value
- .toLowerCase();
-
- const result=videos.filter(v=>
-   v.title.toLowerCase().includes(q) ||
-   v.channel.toLowerCase().includes(q) ||
-   v.tag.toLowerCase().includes(q)
- );
-
- showPage("home");
- renderVideos(result);
-
+ const q=document.getElementById("searchInput").value.toLowerCase();
+ showPage("home");renderVideos(videos.filter(v=>v.title.toLowerCase().includes(q)||v.channel.toLowerCase().includes(q)||v.tag.toLowerCase().includes(q)));
 }
-
-function openPlayer(index){
-
- const v=videos[index];
-
- document.getElementById("playerTitle").innerText=v.title;
-
- document.getElementById("playerMeta").innerText=
- v.views+" • "+v.age;
-
- const player=document.getElementById("videoPlayer");
-
- player.src=v.url;
-
- document.getElementById("playerPage").style.display="block";
-
- player.play().catch(()=>{});
-
+function openPlayer(i){
+ const v=videos[i], p=document.getElementById("videoPlayer");
+ document.getElementById("playerTitle").innerText=v.title;document.getElementById("playerMeta").innerText=v.views+" • "+v.age;
+ p.src=v.url;document.getElementById("playerPage").style.display="block";p.play().catch(()=>{});
 }
-
-function closePlayer(){
-
- const player=document.getElementById("videoPlayer");
-
- player.pause();
-
- document.getElementById("playerPage").style.display="none";
-
+function closePlayer(){const p=document.getElementById("videoPlayer");p.pause();document.getElementById("playerPage").style.display="none";}
+function chooseVideo(){document.getElementById("videoInput").click();}
+function chooseShort(){document.getElementById("shortInput").click();}
+document.getElementById("videoInput").addEventListener("change",e=>{
+ const f=e.target.files&&e.target.files[0];if(!f)return;
+ const url=URL.createObjectURL(f);
+ videos.unshift({title:f.name.replace(/\.[^.]+$/,""),channel:"Your Channel",views:"0 views",age:"Just now",tag:"NEW",url});
+ renderVideos(videos);showPage("home");toast("Video selected and added for test");
+});
+document.getElementById("shortInput").addEventListener("change",e=>{
+ const f=e.target.files&&e.target.files[0];if(!f)return;
+ toast("Short selected: "+f.name);showPage("shorts");
+});
+function goLive(){
+ if(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia){
+   navigator.mediaDevices.getUserMedia({video:true,audio:true}).then(stream=>{
+     stream.getTracks().forEach(t=>t.stop());toast("Camera & microphone ready for Live");
+   }).catch(()=>toast("Allow camera and microphone permission"));
+ }else toast("Live camera is not supported in this build");
 }
-
+function openPostModal(){document.getElementById("postModal").style.display="flex";}
+function closePostModal(){document.getElementById("postModal").style.display="none";}
+function publishPost(){
+ const t=document.getElementById("postText").value.trim();if(!t){toast("Write something first");return;}
+ closePostModal();document.getElementById("postText").value="";toast("Post created");
+}
+function toast(msg){
+ const n=document.getElementById("notice");n.innerText=msg;n.style.display="block";
+ clearTimeout(window._toast);window._toast=setTimeout(()=>n.style.display="none",2200);
+}
+function shareCurrent(){
+ if(navigator.share)navigator.share({title:"ShriPlay",text:document.getElementById("playerTitle").innerText}).catch(()=>{});
+ else toast("Share option opened");
+}
 renderVideos(videos);
-
 </script>
-
 </body>
 </html>
